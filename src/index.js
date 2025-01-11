@@ -82,7 +82,6 @@ const telegram_keyboard = [
 const axios = require('axios');
 const moment = require('jalali-moment');
 const TelegramBot = require('node-telegram-bot-api');
-const persianSwear = require('persian-swear-words').default;
 
 const bot = new TelegramBot(telegram_bot_token, { polling: true });
 
@@ -217,11 +216,6 @@ bot.on('text', async (msg) => {
     if (msg.text == 'کی تو رو ساخته') {
         bot.sendMessage(chatId, 'من توسط @iammhmirzaei برنامه نویسی شدم 🤖');
         return;
-    }
-
-    if (persianSwear.hasSwear(msg.text)) {
-        bot.sendMessage(chatId, '🫢 ننه جون یکم با ادب رو رعایت کن');
-        return
     }
 
     const messageText = msg.text.trim();
