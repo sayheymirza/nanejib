@@ -79,14 +79,14 @@ const telegram_keyboard = [
     }
 ];
 
-const axios = require('axios');
-// import axios from 'axios';
-const moment = require('jalali-moment');
-// import moment from 'jalali-moment';
-const TelegramBot = require('node-telegram-bot-api');
-// import TelegramBot from 'node-telegram-bot-api';
-const persianSwear = require('persian-swear-words').default;
-// import persianSwear from 'persian-swear-words';
+// const axios = require('axios');
+import axios from 'axios';
+// const moment = require('jalali-moment');
+import moment from 'jalali-moment';
+// const TelegramBot = require('node-telegram-bot-api');
+import TelegramBot from 'node-telegram-bot-api';
+// const persianSwear = require('persian-swear-words').default;
+import persianSwear from 'persian-swear-words';
 
 const bot = new TelegramBot(telegram_bot_token, { polling: true });
 
