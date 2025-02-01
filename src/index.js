@@ -9,76 +9,129 @@ const telegram_keyboard = [
     {
         text: '💵 دلار',
         keywords: ['دلار', 'dollar'],
-        callback_data: 'price_dollar_rl',
-        function: async () => { const price = await getPriceOf('price_dollar_rl'); return price['current'] / 10; }
+        callback_data: 'united-states-dollar',
+        function: async () => getPriceOf('united-states-dollar')
     },
-    // یورو : price_eur
     {
         text: '💵 یورو',
         keywords: ['یورو', 'euro'],
-        callback_data: 'price_eur',
-        function: async () => { const price = await getPriceOf('price_eur'); return price['current'] / 10; }
+        callback_data: 'euro',
+        function: async () => getPriceOf('euro')
     },
-    // پوند : price_gbp
     {
         text: '💵 پوند',
         keywords: ['پوند', 'pound'],
-        callback_data: 'price_gbp',
-        function: async () => { const price = await getPriceOf('price_gbp'); return price['current'] / 10; }
+        callback_data: 'pound-sterling',
+        function: async () => getPriceOf('pound-sterling')
     },
-    // درهم :‌ price_aed
     {
         text: '💵 درهم',
-        keywords: ['درهم', 'aed'],
-        callback_data: 'price_aed',
-        function: async () => { const price = await getPriceOf('price_aed'); return price['current'] / 10; }
+        keywords: ['درهم', 'dirham'],
+        callback_data: 'united-arab-emirates-dirham',
+        function: async () => getPriceOf('united-arab-emirates-dirham')
     },
-    // روبل :‌ price_rub
     {
         text: '💵 روبل',
-        keywords: ['روبل', 'rub'],
-        callback_data: 'price_rub',
-        function: async () => { const price = await getPriceOf('price_rub'); return price['current'] / 10; }
+        keywords: ['روبل', 'ruble'],
+        callback_data: 'russian-ruble',
+        function: async () => getPriceOf('russian-ruble')
     },
-    // لیر :‌ price_try
     {
         text: '💵 لیر',
-        keywords: ['لیر', 'try'],
-        callback_data: 'price_try',
-        function: async () => { const price = await getPriceOf('price_try'); return price['current'] / 10; }
+        keywords: ['لیر', 'lir'],
+        callback_data: 'turkish-lira',
+        function: async () => getPriceOf('turkish-lira')
     },
     {
-        text: '💵 بیت کوین',
+        text: '💵 کرون',
+        keywords: ['کرون', 'krona'],
+        callback_data: 'swedish-krona',
+        function: async () => getPriceOf('swedish-krona')
+    },
+    {
+        text: '💵 وون',
+        keywords: ['وون', 'won'],
+        callback_data: 'south-korean-won',
+        function: async () => getPriceOf('south-korean-won')
+    },
+    {
+        text: '💵 دلار کانادا',
+        keywords: ['کانادا', 'canada'],
+        callback_data: 'canadian-dollar',
+        function: async () => getPriceOf('canadian-dollar')
+    },
+    {
+        text: '₿ بیت کوین',
         keywords: ['بیت کوین', 'bitcoin'],
-        callback_data: 'crypto-bitcoin',
-        function: async () => { const price = await getPriceOf('crypto-bitcoin'); return price['toman']; }
+        callback_data: 'bitcoin',
+        function: async () => getPriceOf('bitcoin')
     },
     {
-        text: '💵 تتر',
+        text: '₿ تتر',
         keywords: ['تتر', 'tether'],
         callback_data: 'tether',
-        function: async () => { const price = await getPriceOfTether(); return price['current']; }
+        function: async () => getPriceOf('tether')
     },
     {
-        text: '💵 سکه تمام',
-        keywords: ['سکه تمام', 'سکه', 'sekeb'],
-        callback_data: 'sekeb',
-        function: async () => { const price = await getPriceOf('sekeb'); return price['current'] / 10; }
+        text: '₿ اتریوم',
+        keywords: ['اتریوم', 'ethereum'],
+        callback_data: 'ethereum',
+        function: async () => getPriceOf('ethereum')
     },
     {
-        text: '💵 سکه نیم',
+        text: '₿ سولانا',
+        keywords: ['سولانا', 'solana'],
+        callback_data: 'solana',
+        function: async () => getPriceOf('solana')
+    },
+    {
+        text: '₿ دوج کوین',
+        keywords: ['دوج کوین', 'dogecoin'],
+        callback_data: 'dogecoin',
+        function: async () => getPriceOf('dogecoin')
+    },
+    {
+        text: '₿ ترون',
+        keywords: ['ترون', 'tron'],
+        callback_data: 'tron',
+        function: async () => getPriceOf('tron')
+    },
+    {
+        text: '🪙 سکه تمام',
+        keywords: ['سکه تمام', 'سکه', 'seke', 'tamam'],
+        callback_data: 'azadi-gold-full',
+        function: async () => getPriceOf('azadi-gold-full')
+    },
+    {
+        text: '🪙 سکه نیم',
         keywords: ['سکه نیم', 'نیم سکه', 'nim'],
-        callback_data: 'nim',
-        function: async () => { const price = await getPriceOf('nim'); return price['current'] / 10; }
+        callback_data: 'azadi-gold-half',
+        function: async () => getPriceOf('azadi-gold-half')
 
     },
     {
-        text: '💵 سکه ربع',
+        text: '🪙 سکه ربع',
         keywords: ['سکه ربع', 'ربع سکه', 'رب سکه', 'سکه رب', 'rob'],
-        callback_data: 'rob',
-        function: async () => { const price = await getPriceOf('rob'); return price['current'] / 10; }
-
-    }
+        callback_data: 'azadi-gold-quarter',
+        function: async () => getPriceOf('azadi-gold-quarter')
+    },
+    {
+        text: '🪙 طلای آبشده',
+        keywords: ['طلا آبشده', 'طلا', 'tala'],
+        callback_data: 'melted-gold-mithqal',
+        function: async () => getPriceOf('melted-gold-mithqal')
+    },
+    {
+        text: '🪙 سکه امامی',
+        keywords: ['امامی', 'emami'],
+        callback_data: 'emami-gold',
+        function: async () => getPriceOf('emami-gold')
+    },
+    {
+        text: '📣 عضویت در کانال ننه جیب',
+        keywords: ['کانال', 'عضویت'],
+        callback_data: 'join-to-channel'
+    },
 ];
 
 const axios = require('axios');
@@ -88,9 +141,11 @@ const persianSwear = require('persian-swear-words').default;
 
 const bot = new TelegramBot(telegram_bot_token, { polling: true });
 
+const sleep = (timeout = 1000) => new Promise((resolve) => setTimeout(resolve, timeout))
+
 const getPriceOf = async (key) => {
     try {
-        const result = await axios.get(`https://api.ohmyapi.com/v1/call/currency.get?key=${key}&apiKey=${ohmyapi_api_key}`);
+        const result = await axios.get(`https://api.ohmyapi.com/v1/call/currency.price.get?key=${key}&apiKey=${ohmyapi_api_key}`);
 
         if (result.status != 200 || result.data.ok == false) {
             return null
@@ -102,21 +157,8 @@ const getPriceOf = async (key) => {
     }
 }
 
-const getPriceOfTether = async () => {
-    try {
-        const result = await axios.get(`https://api.ohmyapi.com/v1/call/currency.tetherland?apiKey=${ohmyapi_api_key}`);
 
-        if (result.status != 200 || result.data.ok == false) {
-            return null
-        }
-
-        return result.data.currency;
-    } catch (error) {
-        return null
-    }
-}
-
-const formatPrice = (price) => new Number(price).toLocaleString('fa-IR');
+const formatPrice = (price) => new Number(Math.floor(price)).toLocaleString('fa-IR').split('٬').join(',');
 
 const makeNowMessage = () => {
     const now = moment.utc().locale('fa');
@@ -130,26 +172,40 @@ const makeNowMessage = () => {
 }
 
 const makeChannelMessage = async () => {
-    const keys = ['sekeb', 'nim', 'rob', 'price_dollar_rl', 'crypto-bitcoin'];
+    const keys = ['azadi-gold-full', 'azadi-gold-half', 'azadi-gold-quarter', 'united-states-dollar', 'bitcoin', 'tether', 'melted-gold-mithqal', 'euro', 'pound-sterling', 'united-arab-emirates-dirham', 'turkish-lira', 'russian-ruble', 'ethereum'];
 
     const prices = await Promise.all(keys.map((key) => getPriceOf(key)));
-
-    const tether = await getPriceOfTether();
 
     const now = moment.utc().locale('fa');
 
     now.add(3, 'hours');
     now.add(30, 'minutes');
 
+    const status = (change) => (change === 0 ? '🟨' : change < 0 ? '🔻' : '🔺') + ` ${Math.floor(change)}%`;
+
+    const format = (index) => `${status(prices[index].price.price_change_percent_24h)} قیمت ${prices[index].name} شده ${formatPrice(prices[index].price.price_irt)} تومان`
+
     const message = `
 📊 قیمت ها رو براتون درآوردم
 
-💵 قیمت دلار شده ${formatPrice(prices[3].current / 10)} تومان
-💵 قیمت بیت کوین هست ${formatPrice(prices[4].toman)} تومان
-💵 قیمت تتر هستش ${formatPrice(tether.current)} تومان
-💵 قیمت سکه تمام شده ${formatPrice(prices[0].current / 10)} تومان
-💵 قیمت سکه نیم شده ${formatPrice(prices[1].current / 10)} تومان
-💵 قیمت سکه ربع شده ${formatPrice(prices[2].current / 10)} تومان
+💵 ارز های جهانی 
+${format(3)}
+${format(7)}
+${format(8)}
+${format(9)}
+${format(10)}
+${format(11)}
+
+₿ ارز های دیجیتال
+${format(5)}
+${format(4)}
+${format(12)}
+
+🪙 سکه و طلا
+${format(0)}
+${format(1)}
+${format(2)}
+${format(6)}
 
 ${makeNowMessage()}
 
@@ -157,10 +213,6 @@ ${makeNowMessage()}
 که همه از این اطلاعات استفاده کنند 🙏
 
 📣 @nanejibi
-
-اگر هم دنبال قیمت های دیگری هستی
-یه سر به خودم بزن منتظرتم
-🤖 @nanejibbot
     ‍‍`.trim();
 
     return message;
@@ -169,7 +221,18 @@ ${makeNowMessage()}
 const sendIntervalMessage = async () => {
     const message = await makeChannelMessage();
 
-    bot.sendMessage(telegram_channel_id, message);
+    bot.sendMessage(telegram_channel_id, message, {
+        reply_markup: {
+            inline_keyboard: [
+                [
+                    {
+                        text: '🤖 یه سر به خودم بزن',
+                        url: 'https://t.me/nanejibbot'
+                    }
+                ]
+            ]
+        }
+    });
 
     setTimeout(sendIntervalMessage, telegram_message_timeout);
 }
@@ -202,6 +265,10 @@ const makeKeyborad = (rows = 3) => {
     return keyboard;
 }
 
+const makeJoinMessage = () => {
+    return `ننه جان قربانت یه سر به کانال تلگرامی من بزن و عضو شو و من هر چند وقت یک بار بهت از آخرین وضعیت بازار خبر میدم. 🤗`;
+}
+
 sendIntervalMessage();
 
 bot.onText(/\/start/, (msg) => {
@@ -215,6 +282,15 @@ bot.on('text', async (msg) => {
     if (msg.text.trim().startsWith('/')) return;
 
     const chatId = msg.chat.id;
+
+    if (msg.text == 'سلام') {
+        bot.sendMessage(chatId, '👋', {
+            reply_markup: {
+                keyboard: makeKeyborad()
+            }
+        });
+        return;
+    }
 
     if (msg.text == 'کی تو رو ساخته') {
         bot.sendMessage(chatId, 'من توسط @iammhmirzaei برنامه نویسی شدم 🤖');
@@ -247,18 +323,40 @@ bot.on('text', async (msg) => {
         return
     };
 
-    const sent_message = await bot.sendMessage(chatId, '🔎 دارم برات جدیدترین قیمت رو درمیارم ننه جان', {
-    });
+    if (keyboard.callback_data == 'join-to-channel') {
+        bot.sendMessage(chatId, makeJoinMessage(), {
+            reply_markup: {
+                // 'keyboard': makeKeyborad(),
+                'inline_keyboard': [
+                    [
+                        {
+                            text: '📣 عضویت در کانال',
+                            url: 'https://t.me/nanejibi'
+                        }
+                    ]
+                ]
+            },
+        });
+        return;
+    }
+
+    const sent_message = await bot.sendMessage(chatId, '🔎 دارم برات جدیدترین قیمت رو درمیارم ننه جان', {});
 
     const price = await keyboard.function();
 
     if (price == null) {
-        bot.sendMessage(chatId, '😞 متاسفانه قیمت رو نتونستم برات بیارم');
+        await sleep(1000);
+        bot.editMessageText('😞 متاسفانه قیمت رو نتونستم برات بیارم', {
+            chat_id: chatId,
+            message_id: sent_message.message_id,
+        });
         return;
     }
 
+    const status = (change) => (change === 0 ? '🟨' : change < 0 ? '🔻' : '🔺') + ` ${Math.floor(change)}%`;
+
     const message = `
-📊 قیمت ${keyboard.text.replace('💵 ', '')} ${formatPrice(price)} تومان الان هستش
+📊 قیمت ${price.name} الان ${formatPrice(price.price.price_irt)} تومان هست که ${status(price.price.price_change_percent_24h)} تغییرات داشته
 
 ${makeNowMessage()}
 
