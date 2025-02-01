@@ -7,105 +7,164 @@ const telegram_message_timeout = 1000 * 60 * 60 * 3;
 
 const telegram_keyboard = [
     {
+        text: '🥛 دوغ آبعلی',
+        keywords: ['دوغ', 'dooq', 'doogh'],
+        callback_data: 'dooq-abali',
+        type: 'product',
+        function: async () => getProductOf('6262916600154')
+    },
+    {
+        text: '🍢 کباب کوبیده',
+        keywords: ['کباب', 'kabab'],
+        callback_data: 'kabab',
+        type: 'product',
+        function: async () => getProductOf('6260161414311')
+    },
+    {
+        text: '🍕 پیتزا',
+        keywords: ['پیتزا', 'pizza'],
+        callback_data: 'pizza',
+        type: 'product',
+        function: async () => getProductOf('6260161406545')
+    },
+    {
+        text: '🧊 آب',
+        keywords: ['آب', 'water'],
+        callback_data: 'water',
+        type: 'product',
+        function: async () => getProductOf('6263768900065')
+    },
+    {
+        text: '🍫 شکلات هوبی',
+        keywords: ['شکلات', 'هوبی', 'chocolate'],
+        callback_data: 'chocolate',
+        type: 'product',
+        function: async () => getProductOf('8690504027010')
+    },
+    {
+        text: '🍦 بستنی عروسکی',
+        keywords: ['بستنی', 'icecream'],
+        callback_data: 'icecream',
+        type: 'product',
+        function: async () => getProductOf('6260176822101')
+    },
+    {
         text: '💵 دلار',
         keywords: ['دلار', 'dollar'],
         callback_data: 'united-states-dollar',
+        type: 'currency',
         function: async () => getPriceOf('united-states-dollar')
     },
     {
         text: '💵 یورو',
         keywords: ['یورو', 'euro'],
         callback_data: 'euro',
+        type: 'currency',
         function: async () => getPriceOf('euro')
     },
     {
         text: '💵 پوند',
         keywords: ['پوند', 'pound'],
         callback_data: 'pound-sterling',
+        type: 'currency',
         function: async () => getPriceOf('pound-sterling')
     },
     {
         text: '💵 درهم',
         keywords: ['درهم', 'dirham'],
         callback_data: 'united-arab-emirates-dirham',
+        type: 'currency',
         function: async () => getPriceOf('united-arab-emirates-dirham')
     },
     {
         text: '💵 روبل',
         keywords: ['روبل', 'ruble'],
         callback_data: 'russian-ruble',
+        type: 'currency',
         function: async () => getPriceOf('russian-ruble')
     },
     {
         text: '💵 لیر',
         keywords: ['لیر', 'lir'],
         callback_data: 'turkish-lira',
+        type: 'currency',
         function: async () => getPriceOf('turkish-lira')
     },
     {
         text: '💵 کرون',
         keywords: ['کرون', 'krona'],
         callback_data: 'swedish-krona',
+        type: 'currency',
         function: async () => getPriceOf('swedish-krona')
     },
     {
         text: '💵 وون',
         keywords: ['وون', 'won'],
         callback_data: 'south-korean-won',
+        type: 'currency',
         function: async () => getPriceOf('south-korean-won')
     },
     {
         text: '💵 دلار کانادا',
         keywords: ['کانادا', 'canada'],
         callback_data: 'canadian-dollar',
+        type: 'currency',
         function: async () => getPriceOf('canadian-dollar')
     },
     {
         text: '₿ بیت کوین',
         keywords: ['بیت کوین', 'bitcoin'],
         callback_data: 'bitcoin',
+        type: 'currency',
         function: async () => getPriceOf('bitcoin')
     },
     {
         text: '₿ تتر',
         keywords: ['تتر', 'tether'],
         callback_data: 'tether',
+        type: 'currency',
         function: async () => getPriceOf('tether')
     },
     {
         text: '₿ اتریوم',
         keywords: ['اتریوم', 'ethereum'],
         callback_data: 'ethereum',
+        type: 'currency',
         function: async () => getPriceOf('ethereum')
     },
     {
         text: '₿ سولانا',
         keywords: ['سولانا', 'solana'],
         callback_data: 'solana',
+        type: 'currency',
         function: async () => getPriceOf('solana')
     },
     {
         text: '₿ دوج کوین',
         keywords: ['دوج کوین', 'dogecoin'],
         callback_data: 'dogecoin',
+        type: 'currency',
         function: async () => getPriceOf('dogecoin')
     },
     {
         text: '₿ ترون',
         keywords: ['ترون', 'tron'],
         callback_data: 'tron',
+        type: 'currency',
         function: async () => getPriceOf('tron')
     },
     {
         text: '🪙 سکه تمام',
         keywords: ['سکه تمام', 'سکه', 'seke', 'tamam'],
         callback_data: 'azadi-gold-full',
+        type: 'currency',
         function: async () => getPriceOf('azadi-gold-full')
     },
     {
         text: '🪙 سکه نیم',
         keywords: ['سکه نیم', 'نیم سکه', 'nim'],
         callback_data: 'azadi-gold-half',
+        type: 'currency',
         function: async () => getPriceOf('azadi-gold-half')
 
     },
@@ -113,24 +172,29 @@ const telegram_keyboard = [
         text: '🪙 سکه ربع',
         keywords: ['سکه ربع', 'ربع سکه', 'رب سکه', 'سکه رب', 'rob'],
         callback_data: 'azadi-gold-quarter',
+        type: 'currency',
         function: async () => getPriceOf('azadi-gold-quarter')
     },
     {
         text: '🪙 طلای آبشده',
         keywords: ['طلا آبشده', 'طلا', 'tala'],
         callback_data: 'melted-gold-mithqal',
+        type: 'currency',
         function: async () => getPriceOf('melted-gold-mithqal')
     },
     {
         text: '🪙 سکه امامی',
         keywords: ['امامی', 'emami'],
         callback_data: 'emami-gold',
+        type: 'currency',
         function: async () => getPriceOf('emami-gold')
     },
     {
         text: '📣 عضویت در کانال ننه جیب',
         keywords: ['کانال', 'عضویت'],
-        callback_data: 'join-to-channel'
+        callback_data: 'join-to-channel',
+        type: 'text',
+        function: () => makeJoinMessage(),
     },
 ];
 
@@ -157,6 +221,19 @@ const getPriceOf = async (key) => {
     }
 }
 
+const getProductOf = async (barcode) => {
+    try {
+        const result = await axios.get(`https://api.ohmyapi.com/v1/call/product.scan?code=${barcode}&apiKey=${ohmyapi_api_key}`);
+
+        if (result.status != 200 || result.data.ok == false) {
+            return null
+        }
+
+        return result.data.product;
+    } catch (error) {
+        return null;
+    }
+}
 
 const formatPrice = (price) => new Number(Math.floor(price)).toLocaleString('fa-IR').split('٬').join(',');
 
@@ -323,49 +400,78 @@ bot.on('text', async (msg) => {
         return
     };
 
-    if (keyboard.callback_data == 'join-to-channel') {
-        bot.sendMessage(chatId, makeJoinMessage(), {
-            reply_markup: {
-                // 'keyboard': makeKeyborad(),
-                'inline_keyboard': [
-                    [
-                        {
-                            text: '📣 عضویت در کانال',
-                            url: 'https://t.me/nanejibi'
-                        }
+
+
+    if (keyboard.text == 'text') {
+        if (keyboard.callback_data == 'join-to-channel') {
+            bot.sendMessage(chatId, makeJoinMessage(), {
+                reply_markup: {
+                    // 'keyboard': makeKeyborad(),
+                    'inline_keyboard': [
+                        [
+                            {
+                                text: '📣 عضویت در کانال',
+                                url: 'https://t.me/nanejibi'
+                            }
+                        ]
                     ]
-                ]
-            },
-        });
-        return;
+                },
+            });
+        }
     }
 
-    const sent_message = await bot.sendMessage(chatId, '🔎 دارم برات جدیدترین قیمت رو درمیارم ننه جان', {});
 
-    const price = await keyboard.function();
+    if (keyboard.type == 'currency') {
+        const sent_message = await bot.sendMessage(chatId, '🔎 دارم برات جدیدترین قیمت رو درمیارم ننه جان', {});
 
-    if (price == null) {
-        await sleep(1000);
-        bot.editMessageText('😞 متاسفانه قیمت رو نتونستم برات بیارم', {
+        const price = await keyboard.function();
+
+        if (price == null) {
+            await sleep(1000);
+            bot.editMessageText('😞 متاسفانه قیمت رو نتونستم برات بیارم', {
+                chat_id: chatId,
+                message_id: sent_message.message_id,
+            });
+            return;
+        }
+
+        const status = (change) => (change === 0 ? '🟨' : change < 0 ? '🔻' : '🔺') + ` ${Math.floor(change)}%`;
+
+        const message = `
+        📊 قیمت ${price.name} الان ${formatPrice(price.price.price_irt)} تومان هست که ${status(price.price.price_change_percent_24h)} تغییرات داشته\n${makeNowMessage()}\n
+        🤖 @nanejibbot
+        `.trim();
+
+        // edit sent_message with new one
+        bot.editMessageText(message, {
             chat_id: chatId,
             message_id: sent_message.message_id,
         });
-        return;
     }
 
-    const status = (change) => (change === 0 ? '🟨' : change < 0 ? '🔻' : '🔺') + ` ${Math.floor(change)}%`;
+    if (keyboard.type == 'product') {
+        const sent_message = await bot.sendMessage(chatId, '🔎 دارم برات جدیدترین قیمت رو درمیارم ننه جان', {});
 
-    const message = `
-📊 قیمت ${price.name} الان ${formatPrice(price.price.price_irt)} تومان هست که ${status(price.price.price_change_percent_24h)} تغییرات داشته
+        const price = await keyboard.function();
 
-${makeNowMessage()}
+        if (price == null) {
+            await sleep(1000);
+            bot.editMessageText('😞 متاسفانه قیمت رو نتونستم برات بیارم', {
+                chat_id: chatId,
+                message_id: sent_message.message_id,
+            });
+            return;
+        }
 
-🤖 @nanejibbot
-`.trim();
+        const message = `
+        ${keyboard.text} الان اگر بخوای بخری باید ${formatPrice(price.price)} تومان بپردازی.\n${makeNowMessage()}
+        🤖 @nanejibbot
+        `.trim();
 
-    // edit sent_message with new one
-    bot.editMessageText(message, {
-        chat_id: chatId,
-        message_id: sent_message.message_id,
-    });
+        // edit sent_message with new one
+        bot.editMessageText(message, {
+            chat_id: chatId,
+            message_id: sent_message.message_id,
+        });
+    }
 });
