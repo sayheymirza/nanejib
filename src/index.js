@@ -3,6 +3,7 @@ require('dotenv/config')
 const ohmyapi_api_key = process.env['OHMYAPI_API_KEY'];
 const telegram_bot_token = process.env['TELEGRAM_BOT_TOKEN'];
 const telegram_channel_id = process.env['TELEGRAM_CHANNEL_ID'];
+const telegram_admin_id = process.env['TELEGRAM_ADMIN_ID'].split(',');
 const telegram_message_timeout = 1000 * 60 * 60 * 3;
 
 const telegram_keyboard = [
@@ -196,6 +197,12 @@ const telegram_keyboard = [
         type: 'text',
         function: () => makeJoinMessage(),
     },
+    {
+        text: '✉️ ارسال قیمت ها در کانال',
+        callback_data: 'send-channel-message',
+        type: 'text',
+        admin: true,
+    }
 ];
 
 const axios = require('axios');
@@ -295,7 +302,7 @@ ${makeNowMessage()}
     return message;
 }
 
-const sendIntervalMessage = async () => {
+const sendChannelMessage = async () => {
     const message = await makeChannelMessage();
 
     bot.sendMessage(telegram_channel_id, message, {
@@ -310,11 +317,15 @@ const sendIntervalMessage = async () => {
             ]
         }
     });
+}
+
+const sendIntervalMessage = async () => {
+    sendChannelMessage();
 
     setTimeout(sendIntervalMessage, telegram_message_timeout);
 }
 
-const sendOnStartMessage = (chatId) => {
+const sendOnStartMessage = (chatId, sender_id = 0) => {
     const message = `
 👋 سلام ننه جون خوش آمدی پیش من
 
@@ -326,17 +337,20 @@ const sendOnStartMessage = (chatId) => {
 
     bot.sendMessage(chatId, message, {
         reply_markup: {
-            'keyboard': makeKeyborad(),
+            'keyboard': makeKeyborad(3, sender_id),
         }
     });
 }
 
-const makeKeyborad = (rows = 3) => {
+const makeKeyborad = (rows = 3, sender_id = 0) => {
     // break keyboard into rows
     const keyboard = [];
+    const admin = telegram_admin_id.includes(sender_id.toString());
 
-    for (let i = 0; i < telegram_keyboard.length; i += rows) {
-        keyboard.push(telegram_keyboard.slice(i, i + rows));
+    const keyboards = telegram_keyboard.filter((item) => (item.admin == true && admin) || item.admin != true);
+
+    for (let i = 0; i < keyboards.length; i += rows) {
+        keyboard.push(keyboards.slice(i, i + rows));
     }
 
     return keyboard;
@@ -350,8 +364,9 @@ sendIntervalMessage();
 
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
+    const senderId = msg.from.id;
 
-    sendOnStartMessage(chatId);
+    sendOnStartMessage(chatId, senderId);
 });
 
 // bot on recive message from user that message text be one of keyboard text
@@ -359,23 +374,29 @@ bot.on('text', async (msg) => {
     if (msg.text.trim().startsWith('/')) return;
 
     const chatId = msg.chat.id;
+    const senderId = msg.from.id;
 
     if (msg.text == 'سلام') {
         bot.sendMessage(chatId, '👋', {
+            reply_to_message_id: msg.message_id,
             reply_markup: {
-                keyboard: makeKeyborad()
+                keyboard: makeKeyborad(3, senderId),
             }
         });
         return;
     }
 
     if (msg.text == 'کی تو رو ساخته') {
-        bot.sendMessage(chatId, 'من توسط @iammhmirzaei برنامه نویسی شدم 🤖');
+        bot.sendMessage(chatId, 'من توسط @iammhmirzaei برنامه نویسی شدم 🤖', {
+            reply_to_message_id: msg.message_id,
+        });
         return;
     }
 
     if (persianSwear.hasSwear(msg.text)) {
-        bot.sendMessage(chatId, '🫢 ننه جون یکم با ادب رو رعایت کن');
+        bot.sendMessage(chatId, '🫢 ننه جون یکم با ادب رو رعایت کن', {
+            reply_to_message_id: msg.message_id,
+        });
         return
     }
 
@@ -393,18 +414,18 @@ bot.on('text', async (msg) => {
 
     if (keyboard == null) {
         bot.sendMessage(chatId, '😞 نفهمیدم چی می خواهی\n\nبهتره با این دکمه هایی که بهت دادم\nبهم بگی چی می خوای', {
+            reply_to_message_id: msg.message_id,
             reply_markup: {
-                'keyboard': makeKeyborad(),
+                'keyboard': makeKeyborad(3, senderId),
             },
         });
         return
     };
 
-
-
-    if (keyboard.text == 'text') {
+    if (keyboard.type == 'text') {
         if (keyboard.callback_data == 'join-to-channel') {
             bot.sendMessage(chatId, makeJoinMessage(), {
+                reply_to_message_id: msg.message_id,
                 reply_markup: {
                     // 'keyboard': makeKeyborad(),
                     'inline_keyboard': [
@@ -418,11 +439,26 @@ bot.on('text', async (msg) => {
                 },
             });
         }
+
+        if (keyboard.callback_data == 'send-channel-message') {
+            const sent_message = await bot.sendMessage(chatId, 'چشم انجام می دم', {
+                reply_to_message_id: msg.message_id,
+            });
+
+            await sendChannelMessage();
+
+            bot.editMessageText('انجام شد', {
+                chat_id: chatId,
+                message_id: sent_message.message_id,
+            })
+        }
     }
 
 
     if (keyboard.type == 'currency') {
-        const sent_message = await bot.sendMessage(chatId, '🔎 دارم برات جدیدترین قیمت رو درمیارم ننه جان', {});
+        const sent_message = await bot.sendMessage(chatId, '🔎 دارم برات جدیدترین قیمت رو درمیارم ننه جان', {
+            reply_to_message_id: msg.message_id,
+        });
 
         const price = await keyboard.function();
 
@@ -450,7 +486,9 @@ bot.on('text', async (msg) => {
     }
 
     if (keyboard.type == 'product') {
-        const sent_message = await bot.sendMessage(chatId, '🔎 دارم برات جدیدترین قیمت رو درمیارم ننه جان', {});
+        const sent_message = await bot.sendMessage(chatId, '🔎 دارم برات جدیدترین قیمت رو درمیارم ننه جان', {
+            reply_to_message_id: msg.message_id,
+        });
 
         const price = await keyboard.function();
 
