@@ -1,5 +1,5 @@
 # Use Node.js v22 Alpine as the base image
-FROM node:22-alpine
+FROM node:24-alpine
 
 # Set working directory inside the container
 WORKDIR /usr/src/app
@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --verbose
 
 # Copy the rest of the application files into the container
 COPY . .
